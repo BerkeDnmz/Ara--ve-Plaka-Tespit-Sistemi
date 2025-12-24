@@ -1,4 +1,4 @@
-import csv
+import csv, os
 import numpy as np
 from scipy.interpolate import interp1d
 
@@ -74,18 +74,18 @@ def interpolate_bounding_boxes(data):
 
     return interpolated_data
 
-
-# Load the CSV file
-with open('output/test.csv', 'r') as file:
-    reader = csv.DictReader(file)
-    data = list(reader)
-
-# Interpolate missing data
-interpolated_data = interpolate_bounding_boxes(data)
-
-# Write updated data to a new CSV file
-header = ['frame_nmr', 'car_id', 'car_bbox', 'license_plate_bbox', 'license_plate_bbox_score', 'license_number', 'license_number_score']
-with open('output/test_interpolated.csv', 'w', newline='') as file:
-    writer = csv.DictWriter(file, fieldnames=header)
-    writer.writeheader()
-    writer.writerows(interpolated_data)
+def func(input_name, output_name):
+    # Load the CSV file
+    with open('./output/'+ input_name +'.csv', 'r') as file:
+        reader = csv.DictReader(file)
+        data = list(reader)
+    
+    # Interpolate missing data
+    interpolated_data = interpolate_bounding_boxes(data)
+    
+    # Write updated data to a new CSV file
+    header = ['frame_nmr', 'car_id', 'car_bbox', 'license_plate_bbox', 'license_plate_bbox_score', 'license_number', 'license_number_score']
+    with open('./output/'+ output_name +'.csv', 'w', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=header)
+        writer.writeheader()
+        writer.writerows(interpolated_data)
