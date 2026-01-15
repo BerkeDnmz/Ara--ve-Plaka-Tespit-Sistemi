@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from tkinter import filedialog
-import sys, cv2, datetime
+import sys, os, cv2, datetime
 from PyQt5.QtGui import QImage, QPixmap, QIcon
 from PyQt5.QtCore import QThread, pyqtSignal, Qt
 from PyQt5.QtWidgets import *
@@ -40,14 +40,22 @@ class ShowResult(QtCore.QThread):
     def run(self):
         while(True):
             cap = cv2.VideoCapture("./output/output.mp4")
+            total_frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+            fps = cap.get(cv2.CAP_PROP_FPS)
+            total_seconds = round(total_frames / fps)
+            video_time = datetime.timedelta(seconds=total_seconds)
+            frame_nmr = 0
             ret = True
             while ret:
                 ret, frame = cap.read()
                 if ret:
+                    frame_nmr += 1
+                    window.lb_time.setText(str(datetime.timedelta(seconds=round(frame_nmr/fps))) + "/" + str(video_time))
                     setFrame(frame)
                     
                 while not self.window.isVideoPlaying:
                     pass
+                
             if(self.window.isRepeat==False):
                 break
             #cap.release()
@@ -156,7 +164,11 @@ def startDetection(video_path, output_name):
     
     # load models
     model = YOLO("../model/yolo11n.pt")
+    model.to('cuda')
     license_plate_detector = YOLO('../model/best_20.pt')
+    license_plate_detector.to('cuda')
+    
+    window.table_car.setRowCount(0)
     
     # load video
     cap = cv2.VideoCapture(video_path)
@@ -217,7 +229,7 @@ def startDetection(video_path, output_name):
                     _, license_plate_crop_thresh = cv2.threshold(license_plate_crop_gray, 64, 255, cv2.THRESH_BINARY_INV)
     
                     # read license plate number
-                    license_plate_text, license_plate_text_score = read_license_plate(license_plate_crop_thresh)
+                    license_plate_text, license_plate_text_score = read_license_plate(license_plate_crop_thresh, window.cb_plate_version.isChecked())
     
                     if license_plate_text is not None:
                         results[frame_nmr][car_id] = {'car': {'bbox': [xcar1, ycar1, xcar2, ycar2]},
@@ -225,12 +237,29 @@ def startDetection(video_path, output_name):
                                                                         'text': license_plate_text,
                                                                         'bbox_score': score,
                                                                         'text_score': license_plate_text_score}}
+                        
+                    elif(window.cb_plate.isChecked() == False):
+                        license_plate_text = "????"
+                        license_plate_text_score = 0
+                        results[frame_nmr][car_id] = {'car': {'bbox': [xcar1, ycar1, xcar2, ycar2]},
+                                                      'license_plate': {'bbox': [x1, y1, x2, y2],
+                                                                        'text': "????",
+                                                                        'bbox_score': score,
+                                                                        'text_score': license_plate_text_score}}
+                    if(license_plate_text is not None or window.cb_plate.isChecked() == False):     
                         isUnique = True
                         row_count = window.table_car.rowCount()
                         for i in range(row_count):
                             table_item = window.table_car.item(i,0)
                             if(table_item.text() == str(car_id)):
                                 isUnique = False
+                                
+                                if(window.cb_plate.isChecked() == False and window.table_car.item(i,3).text() == "????"):
+                                    window.table_car.setItem(i,3,QTableWidgetItem(license_plate_text))
+                                    window.table_car.setItem(i,4,QTableWidgetItem(str(license_plate_text_score)))
+                                elif(float(license_plate_text_score) > float(window.table_car.item(i,4).text())):
+                                    window.table_car.setItem(i,3,QTableWidgetItem(license_plate_text))
+                                    window.table_car.setItem(i,4,QTableWidgetItem(str(license_plate_text_score)))
                                 break
                         if(isUnique):
                             window.table_car.setRowCount(row_count+1)
@@ -238,6 +267,7 @@ def startDetection(video_path, output_name):
                             window.table_car.setItem(row_count,1,QTableWidgetItem(str(current_time)))
                             window.table_car.setItem(row_count,2,QTableWidgetItem(str(frame_nmr)))
                             window.table_car.setItem(row_count,3,QTableWidgetItem(license_plate_text))
+                            window.table_car.setItem(row_count,4,QTableWidgetItem(str(license_plate_text_score)))
     
     # write results
     write_csv(results, './output/'+ output_name +'.csv')
