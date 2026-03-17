@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from tkinter import filedialog
-import sys, os, cv2, datetime
+import sys, os, cv2, datetime, torch
 from PyQt5.QtGui import QImage, QPixmap, QIcon
 from PyQt5.QtCore import QThread, pyqtSignal, Qt
 from PyQt5.QtWidgets import *
@@ -10,6 +10,7 @@ from ultralytics import YOLO
 from lib.sort.sort import *
 from lib.util import get_car, read_license_plate, write_csv
 
+#This thread class does the object tracking
 class VideoProcessor(QtCore.QThread):
     finished = QtCore.pyqtSignal()
 
@@ -30,23 +31,38 @@ class VideoProcessor(QtCore.QThread):
         
         window.lb_process.setText("İşlem: Tamamlandı!")
         self.finished.emit()
-        
-class ShowResult(QtCore.QThread):
+
+#Shows the end result video
+class ShowVideo(QtCore.QThread):
     finished = QtCore.pyqtSignal()
 
-    def __init__(self):
-        super(ShowResult, self).__init__()
+    def __init__(self, video_origin):
+        super(ShowVideo, self).__init__()
+        self.video_origin = video_origin
 
     def run(self):
         while(True):
-            cap = cv2.VideoCapture("./output/output.mp4")
+            cap = cv2.VideoCapture(self.window.lbl_path.text())
+            if(self.video_origin == "output"):
+                cap = cv2.VideoCapture(self.window.lbl_path_2.text() + "/output.mp4")
             total_frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
             fps = cap.get(cv2.CAP_PROP_FPS)
             total_seconds = round(total_frames / fps)
             video_time = datetime.timedelta(seconds=total_seconds)
             frame_nmr = 0
             ret = True
-            while ret:
+            while ret and self.window.willStop==False:
+                
+                if(self.window.goBackward==True):
+                    frame_nmr = max(frame_nmr - fps*10, 0)
+                    cap.set(cv2.CAP_PROP_POS_FRAMES, frame_nmr)
+                    self.window.goBackward = False
+                
+                if(self.window.goForward==True):
+                    frame_nmr = min(frame_nmr + fps*10, total_frames)
+                    cap.set(cv2.CAP_PROP_POS_FRAMES, frame_nmr)
+                    self.window.goForward = False
+                
                 ret, frame = cap.read()
                 if ret:
                     frame_nmr += 1
@@ -58,16 +74,17 @@ class ShowResult(QtCore.QThread):
                 
             if(self.window.isRepeat==False):
                 break
-            #cap.release()
+            cap.release()
         self.finished.emit()
-        #if(self.window.isRepeat):
-         #   self.videoProcessor = ShowResult()
-          #  self.videoProcessor.window = self
-           # self.videoProcessor.start()
 
+#Ui widgets are setup and connected to functions here
 class Ui(QtWidgets.QMainWindow):
     isVideoPlaying = True
     isRepeat = False
+    goForward = False
+    goBackward = False
+    willStop = False
+    video_origin = "output"
     
     def __init__(self):
         super(Ui, self).__init__()
@@ -85,13 +102,24 @@ class Ui(QtWidgets.QMainWindow):
         
         self.find_button.clicked.connect(self.findFile)
         self.save_button.clicked.connect(self.saveFile)
+        self.gpu_button.clicked.connect(self.gpuHelp)
+        self.hs_threshold.valueChanged.connect(self.thresholdValueChanged)
         self.start_button.clicked.connect(self.startRecognition)
         self.pause_button.clicked.connect(self.pause)
+        self.input_button.clicked.connect(self.showInput)
         self.result_button.clicked.connect(self.showResult)
         self.repeat_button.clicked.connect(self.repeat)
+        self.forward_button.clicked.connect(self.setForward)
+        self.backward_button.clicked.connect(self.setBackward)
+        self.stop_button.clicked.connect(self.stopVideo)
         self.frame_counter.textChanged.connect(self.updateProgressBar)
         self.searchbar.textChanged.connect(self.search)
         self.table_car.cellDoubleClicked.connect(self.getFrame)
+        
+        if torch.cuda.is_available():
+            self.lb_gpu_result.setText(f"GPU: {torch.cuda.get_device_name(0)}")
+        else:
+            self.lb_gpu_result.setText("GPU uyumlu değil.")
 
         self.show()
 
@@ -104,6 +132,20 @@ class Ui(QtWidgets.QMainWindow):
         filename = filedialog.askdirectory()
         if filename:
             self.lbl_path_2.setText(filename)
+            
+    def gpuHelp(self):
+        dlg = QDialog(self)
+        dlg.setWindowTitle("Analiz Sırasında Grafik Kartı Nasıl Kullanılır?")
+        layout = QVBoxLayout()
+        message = QLabel("Nvidia CUDA Developer Tools uygulamasını bilgisayarınıza kurun.\n"
+                         +"'pip install cuda-toolkit[version]' ile python çevresine kurun.\n"
+                         +"Her iki uygulamanında aynı versiyon numarasına sahip olduğundan emin olun.")
+        layout.addWidget(message)
+        dlg.setLayout(layout)
+        dlg.exec()
+        
+    def thresholdValueChanged(self):
+        self.lb_threshold.setText(str(self.hs_threshold.value()))
 
     def startRecognition(self):
         self.videoProcessor = VideoProcessor(self.lbl_path.text(), self.lbl_path_2.text())
@@ -127,13 +169,29 @@ class Ui(QtWidgets.QMainWindow):
             self.repeat_button.setIcon(QIcon('Icons/repeat.png'))
             self.isRepeat = True
             
+    def setForward(self):
+        self.goForward = True
+        
+    def setBackward(self):
+        self.goBackward = True
+        
+    def stopVideo(self):
+        self.willStop = True
+        
+    def showInput(self):
+        self.video_origin = "input"
+        self.showVideo = ShowVideo(self.video_origin)
+        self.showVideo.window = self
+        self.showVideo.start()
+            
     def showResult(self):
-        self.videoProcessor = ShowResult()
-        self.videoProcessor.window = self
-        self.videoProcessor.start()
+        self.video_origin = "output"
+        self.showVideo = ShowVideo(self.video_origin)
+        self.showVideo.window = self
+        self.showVideo.start()
             
     def updateProgressBar(self):
-        window.pb_detection.setValue(int(window.frame_counter.text()))
+        window.pb_detection.setValue(int(window.frame_counter.text())+1)
         
     def getFrame(self, row, column):
         frame_nmr = int(window.table_car.item(row, 2).text())
@@ -157,13 +215,16 @@ class Ui(QtWidgets.QMainWindow):
             self.table_car.setRowHidden(row, name not in item.text().lower())
         
             
+#Functions below are run inside threads. They are here to not clutter the thread classes.
+
 def startDetection(video_path, output_name):
     results = {}
     
     mot_tracker = Sort()
     
     # load models
-    model = YOLO("../model/yolo11n.pt")
+    model_name = window.cb_model.currentText()
+    model = YOLO("../model/" + model_name)
     model.to('cuda')
     license_plate_detector = YOLO('../model/best_20.pt')
     license_plate_detector.to('cuda')
@@ -180,6 +241,7 @@ def startDetection(video_path, output_name):
     video_time = datetime.timedelta(seconds=total_seconds)
     
     window.pb_detection.setMaximum(int(total_frames))
+    plate_thres = window.hs_threshold.value()
     
     vehicles = [2, 3, 5, 7]
     
@@ -194,7 +256,7 @@ def startDetection(video_path, output_name):
             setFrame(frame)
             
             window.lb_frame.setText(str(frame_nmr + 1) + "/" + str(int(total_frames)))
-            window.frame_counter.setText(str(frame_nmr+1))
+            window.frame_counter.setText(str(frame_nmr))
             window.lb_time.setText(str(current_time) + "/" + str(video_time))
             
             
@@ -226,10 +288,10 @@ def startDetection(video_path, output_name):
     
                     # process license plate
                     license_plate_crop_gray = cv2.cvtColor(license_plate_crop, cv2.COLOR_BGR2GRAY)
-                    _, license_plate_crop_thresh = cv2.threshold(license_plate_crop_gray, 64, 255, cv2.THRESH_BINARY_INV)
+                    _, license_plate_crop_thresh = cv2.threshold(license_plate_crop_gray, plate_thres, 255, cv2.THRESH_BINARY_INV)
     
                     # read license plate number
-                    license_plate_text, license_plate_text_score = read_license_plate(license_plate_crop_thresh, window.cb_plate_version.isChecked())
+                    license_plate_text, license_plate_text_score = read_license_plate(license_plate_crop_thresh, window.cb_plate_version.isChecked(), window.line_plate.text().upper())
     
                     if license_plate_text is not None:
                         results[frame_nmr][car_id] = {'car': {'bbox': [xcar1, ycar1, xcar2, ycar2]},

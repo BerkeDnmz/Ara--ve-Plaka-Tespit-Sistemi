@@ -44,6 +44,9 @@
   <property name="styleSheet">
    <string notr="true">background-color:rgb(225, 225, 225);</string>
   </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonIconOnly</enum>
+  </property>
   <property name="tabShape">
    <enum>QTabWidget::Rounded</enum>
   </property>
@@ -110,7 +113,7 @@
     <property name="geometry">
      <rect>
       <x>850</x>
-      <y>830</y>
+      <y>870</y>
       <width>170</width>
       <height>80</height>
      </rect>
@@ -137,7 +140,7 @@ color:rgb(255, 255, 255);</string>
       <x>84</x>
       <y>175</y>
       <width>971</width>
-      <height>631</height>
+      <height>571</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -204,8 +207,8 @@ color:rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="pause_button">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>830</y>
+      <x>350</x>
+      <y>770</y>
       <width>170</width>
       <height>80</height>
      </rect>
@@ -413,8 +416,8 @@ color:rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="result_button">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>830</y>
+      <x>600</x>
+      <y>870</y>
       <width>170</width>
       <height>80</height>
      </rect>
@@ -492,8 +495,8 @@ color:rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="repeat_button">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>830</y>
+      <x>100</x>
+      <y>870</y>
       <width>170</width>
       <height>80</height>
      </rect>
@@ -559,7 +562,7 @@ color:rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>1150</x>
-      <y>760</y>
+      <y>850</y>
       <width>431</width>
       <height>41</height>
      </rect>
@@ -582,7 +585,7 @@ color:rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>1150</x>
-      <y>800</y>
+      <y>890</y>
       <width>241</width>
       <height>41</height>
      </rect>
@@ -599,6 +602,331 @@ color:rgb(255, 255, 255);</string>
     </property>
     <property name="checked">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="backward_button">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>770</y>
+      <width>170</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Geri</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="forward_button">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>770</y>
+      <width>170</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>İleri</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="stop_button">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>770</y>
+      <width>170</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Bitir</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="input_button">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>870</y>
+      <width>170</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Girişi Göster</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>1150</x>
+      <y>20</y>
+      <width>581</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="gpu_button">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>30</y>
+       <width>181</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Nasıl Aktif Edilir?</string>
+     </property>
+     <property name="autoRepeat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_gpu_text">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>281</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Nvidia Grafik Kartı Uyumluluğu:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_gpu_result">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>361</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Programın grafik kartı desteğini test edebilirsiniz.</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QComboBox" name="cb_model">
+    <property name="geometry">
+     <rect>
+      <x>1390</x>
+      <y>757</y>
+      <width>181</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>yolo11x.pt</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>yolo11l.pt</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>yolo11m.pt</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>yolo11s.pt</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>yolo11n.pt</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="lb_frame_5">
+    <property name="geometry">
+     <rect>
+      <x>1150</x>
+      <y>760</y>
+      <width>231</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Araç Tespit Modeli:</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="hs_threshold">
+    <property name="geometry">
+     <rect>
+      <x>1520</x>
+      <y>818</y>
+      <width>160</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::DefaultContextMenu</enum>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="value">
+     <number>64</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_frame_6">
+    <property name="geometry">
+     <rect>
+      <x>1150</x>
+      <y>810</y>
+      <width>301</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Plaka Okuma Eşik Değeri:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_threshold">
+    <property name="geometry">
+     <rect>
+      <x>1460</x>
+      <y>810</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>64</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="line_plate">
+    <property name="geometry">
+     <rect>
+      <x>1390</x>
+      <y>895</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>LLDDLLL</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>
