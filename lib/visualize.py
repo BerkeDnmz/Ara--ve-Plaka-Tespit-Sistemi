@@ -23,7 +23,7 @@ def draw_border(img, top_left, bottom_right, color=(0, 255, 0), thickness=10, li
 
     return img
 
-def func(video_path, result_file, save_path):
+def func(video_path, result_file, save_path, new_file_name):
     results = pd.read_csv('./output/'+ result_file +'.csv')
     
     # load video
@@ -33,7 +33,7 @@ def func(video_path, result_file, save_path):
     fps = cap.get(cv2.CAP_PROP_FPS)
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    out = cv2.VideoWriter(save_path + "/output.mp4", fourcc, fps, (width, height))
+    out = cv2.VideoWriter(save_path + "/"+ new_file_name + ".mp4", fourcc, fps, (width, height))
     
     license_plate = {}
     for car_id in np.unique(results['car_id']):

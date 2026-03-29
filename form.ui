@@ -232,7 +232,7 @@ color:rgb(255, 255, 255);</string>
    <widget class="QLabel" name="lb_frame">
     <property name="geometry">
      <rect>
-      <x>1350</x>
+      <x>1310</x>
       <y>250</y>
       <width>201</width>
       <height>31</height>
@@ -252,7 +252,7 @@ color:rgb(255, 255, 255);</string>
    <widget class="QLabel" name="lb_frame_2">
     <property name="geometry">
      <rect>
-      <x>1150</x>
+      <x>1110</x>
       <y>250</y>
       <width>191</width>
       <height>31</height>
@@ -272,7 +272,7 @@ color:rgb(255, 255, 255);</string>
    <widget class="QProgressBar" name="pb_detection">
     <property name="geometry">
      <rect>
-      <x>1150</x>
+      <x>1110</x>
       <y>212</y>
       <width>541</width>
       <height>31</height>
@@ -293,7 +293,7 @@ color:rgb(255, 255, 255);</string>
    <widget class="QLabel" name="lb_process">
     <property name="geometry">
      <rect>
-      <x>1150</x>
+      <x>1110</x>
       <y>180</y>
       <width>531</width>
       <height>31</height>
@@ -313,10 +313,10 @@ color:rgb(255, 255, 255);</string>
    <widget class="QTableWidget" name="table_car">
     <property name="geometry">
      <rect>
-      <x>1150</x>
+      <x>1110</x>
       <y>350</y>
       <width>741</width>
-      <height>341</height>
+      <height>221</height>
      </rect>
     </property>
     <property name="font">
@@ -439,7 +439,7 @@ color:rgb(255, 255, 255);</string>
    <widget class="QLineEdit" name="frame_counter">
     <property name="geometry">
      <rect>
-      <x>1730</x>
+      <x>1690</x>
       <y>240</y>
       <width>101</width>
       <height>41</height>
@@ -455,8 +455,8 @@ color:rgb(255, 255, 255);</string>
    <widget class="QLabel" name="lb_time">
     <property name="geometry">
      <rect>
-      <x>1310</x>
-      <y>710</y>
+      <x>1280</x>
+      <y>590</y>
       <width>241</width>
       <height>31</height>
      </rect>
@@ -475,9 +475,9 @@ color:rgb(255, 255, 255);</string>
    <widget class="QLabel" name="lb_frame_4">
     <property name="geometry">
      <rect>
-      <x>1150</x>
-      <y>710</y>
-      <width>151</width>
+      <x>1110</x>
+      <y>590</y>
+      <width>161</width>
       <height>31</height>
      </rect>
     </property>
@@ -526,7 +526,7 @@ color:rgb(255, 255, 255);</string>
    <widget class="QLineEdit" name="searchbar">
     <property name="geometry">
      <rect>
-      <x>1250</x>
+      <x>1210</x>
       <y>300</y>
       <width>191</width>
       <height>31</height>
@@ -537,11 +537,14 @@ color:rgb(255, 255, 255);</string>
       <pointsize>14</pointsize>
      </font>
     </property>
+    <property name="clearButtonEnabled">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QLabel" name="lb_frame_3">
     <property name="geometry">
      <rect>
-      <x>1150</x>
+      <x>1110</x>
       <y>300</y>
       <width>91</width>
       <height>31</height>
@@ -561,8 +564,8 @@ color:rgb(255, 255, 255);</string>
    <widget class="QCheckBox" name="cb_plate">
     <property name="geometry">
      <rect>
-      <x>1150</x>
-      <y>850</y>
+      <x>1110</x>
+      <y>860</y>
       <width>431</width>
       <height>41</height>
      </rect>
@@ -584,9 +587,9 @@ color:rgb(255, 255, 255);</string>
    <widget class="QCheckBox" name="cb_plate_version">
     <property name="geometry">
      <rect>
-      <x>1150</x>
-      <y>890</y>
-      <width>241</width>
+      <x>1110</x>
+      <y>905</y>
+      <width>101</width>
       <height>41</height>
      </rect>
     </property>
@@ -598,7 +601,7 @@ color:rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="text">
-     <string>Plaka: AB-12-CDE</string>
+     <string>Plaka:</string>
     </property>
     <property name="checked">
      <bool>true</bool>
@@ -699,7 +702,7 @@ color:rgb(255, 255, 255);</string>
    <widget class="QFrame" name="frame_2">
     <property name="geometry">
      <rect>
-      <x>1150</x>
+      <x>1110</x>
       <y>20</y>
       <width>581</width>
       <height>141</height>
@@ -739,7 +742,7 @@ color:rgb(255, 255, 255);</string>
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>281</width>
+       <width>361</width>
        <height>31</height>
       </rect>
      </property>
@@ -778,8 +781,8 @@ color:rgb(255, 255, 255);</string>
    <widget class="QComboBox" name="cb_model">
     <property name="geometry">
      <rect>
-      <x>1390</x>
-      <y>757</y>
+      <x>1470</x>
+      <y>637</y>
       <width>181</width>
       <height>41</height>
      </rect>
@@ -820,9 +823,9 @@ color:rgb(255, 255, 255);</string>
    <widget class="QLabel" name="lb_frame_5">
     <property name="geometry">
      <rect>
-      <x>1150</x>
-      <y>760</y>
-      <width>231</width>
+      <x>1110</x>
+      <y>640</y>
+      <width>351</width>
       <height>31</height>
      </rect>
     </property>
@@ -840,8 +843,8 @@ color:rgb(255, 255, 255);</string>
    <widget class="QSlider" name="hs_threshold">
     <property name="geometry">
      <rect>
-      <x>1520</x>
-      <y>818</y>
+      <x>1480</x>
+      <y>788</y>
       <width>160</width>
       <height>21</height>
      </rect>
@@ -862,8 +865,8 @@ color:rgb(255, 255, 255);</string>
    <widget class="QLabel" name="lb_frame_6">
     <property name="geometry">
      <rect>
-      <x>1150</x>
-      <y>810</y>
+      <x>1110</x>
+      <y>780</y>
       <width>301</width>
       <height>31</height>
      </rect>
@@ -882,8 +885,8 @@ color:rgb(255, 255, 255);</string>
    <widget class="QLabel" name="lb_threshold">
     <property name="geometry">
      <rect>
-      <x>1460</x>
-      <y>810</y>
+      <x>1420</x>
+      <y>780</y>
       <width>51</width>
       <height>31</height>
      </rect>
@@ -911,8 +914,8 @@ color:rgb(255, 255, 255);</string>
    <widget class="QLineEdit" name="line_plate">
     <property name="geometry">
      <rect>
-      <x>1390</x>
-      <y>895</y>
+      <x>1220</x>
+      <y>910</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -927,6 +930,360 @@ color:rgb(255, 255, 255);</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cb_super">
+    <property name="geometry">
+     <rect>
+      <x>1470</x>
+      <y>687</y>
+      <width>181</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>Kapalı</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>EDSR</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>ESPCN</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Keskinleştirme</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Histogram Eşitlemesi</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Gaussian Filtresi</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="lb_frame_7">
+    <property name="geometry">
+     <rect>
+      <x>1110</x>
+      <y>690</y>
+      <width>351</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Çözünürlük Artırma Yöntemi:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="lang_english">
+    <property name="geometry">
+     <rect>
+      <x>1720</x>
+      <y>99</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>English</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="lang_turkish">
+    <property name="geometry">
+     <rect>
+      <x>1720</x>
+      <y>20</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Türkçe</string>
+    </property>
+    <property name="autoRepeat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cb_sql">
+    <property name="geometry">
+     <rect>
+      <x>1360</x>
+      <y>900</y>
+      <width>251</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>SQL kaydı tutulsun</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_frame_8">
+    <property name="geometry">
+     <rect>
+      <x>1110</x>
+      <y>822</y>
+      <width>301</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Plaka Okuma Eşik Aralığı:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_threshold_2">
+    <property name="geometry">
+     <rect>
+      <x>1420</x>
+      <y>822</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QSlider" name="hs_threshold_2">
+    <property name="geometry">
+     <rect>
+      <x>1480</x>
+      <y>830</y>
+      <width>160</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::DefaultContextMenu</enum>
+    </property>
+    <property name="maximum">
+     <number>128</number>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="sb_resize">
+    <property name="geometry">
+     <rect>
+      <x>1560</x>
+      <y>735</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="suffix">
+     <string/>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_frame_9">
+    <property name="geometry">
+     <rect>
+      <x>1110</x>
+      <y>735</y>
+      <width>431</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Görüntü Büyütme Oranı ve Metodu:</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="sb_skip">
+    <property name="geometry">
+     <rect>
+      <x>1680</x>
+      <y>820</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="suffix">
+     <string/>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="value">
+     <number>1</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_frame_10">
+    <property name="geometry">
+     <rect>
+      <x>1670</x>
+      <y>780</y>
+      <width>241</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Atlama Miktarı:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cb_method">
+    <property name="geometry">
+     <rect>
+      <x>1670</x>
+      <y>730</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>Cubic</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Linear</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Nearest</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QCheckBox" name="cb_video">
+    <property name="geometry">
+     <rect>
+      <x>1630</x>
+      <y>900</y>
+      <width>271</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Çoklu video tespiti</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>

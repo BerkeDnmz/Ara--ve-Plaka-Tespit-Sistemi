@@ -12,9 +12,18 @@ def interpolate_bounding_boxes(data):
 
     interpolated_data = []
     unique_car_ids = np.unique(car_ids)
+    results = {}
     for car_id in unique_car_ids:
 
         frame_numbers_ = [p['frame_nmr'] for p in data if int(float(p['car_id'])) == int(float(car_id))]
+        
+        car_data = [p for p in data if int(float(p['car_id'])) == int(float(car_id))]
+        
+        #frame_numbers_ = car_data['frame_nmr']
+        
+        best = max(car_data, key=lambda x: float(x['license_number_score']))
+        results[car_id] = {'license_number': best['license_number'], 'score': best['license_number_score']}
+        
         print(frame_numbers_, car_id)
 
         # Filter data for a specific car ID
@@ -64,12 +73,19 @@ def interpolate_bounding_boxes(data):
                 row['license_plate_bbox_score'] = '0'
                 row['license_number'] = '0'
                 row['license_number_score'] = '0'
+                
+                """
             else:
                 original_row = [p for p in data if int(p['frame_nmr']) == frame_number and int(float(p['car_id'])) == int(float(car_id))][0]
                 row['license_plate_bbox_score'] = original_row['license_plate_bbox_score'] if 'license_plate_bbox_score' in original_row else '0'
                 row['license_number'] = original_row['license_number'] if 'license_number' in original_row else '0'
                 row['license_number_score'] = original_row['license_number_score'] if 'license_number_score' in original_row else '0'
-
+"""
+            else:
+                original_row = [p for p in data if int(p['frame_nmr']) == frame_number and int(float(p['car_id'])) == int(float(car_id))][0]
+                row['license_plate_bbox_score'] = original_row['license_plate_bbox_score'] if 'license_plate_bbox_score' in original_row else '0'
+                row['license_number'] = results[car_id]['license_number']
+                row['license_number_score'] = results[car_id]['score']
             interpolated_data.append(row)
 
     return interpolated_data

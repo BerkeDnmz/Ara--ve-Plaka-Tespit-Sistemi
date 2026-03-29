@@ -128,22 +128,16 @@ def read_license_plate(license_plate_crop, formatting, format_string):
     """
 
     detections = reader.readtext(license_plate_crop)
-
     for detection in detections:
         bbox, text, score = detection
-
         text = text.upper().replace(' ', '')
-        
-        
         if(license_complies_format(text, format_string) and formatting):
             return format_license(text, format_string), score
-        
         
         if(len(text) == len(format_string) and formatting == False):
             return text, score
         
-
-    return None, None
+    return "None", 0
 
 
 def get_car(license_plate, vehicle_track_ids):
